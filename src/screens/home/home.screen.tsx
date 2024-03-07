@@ -1,21 +1,18 @@
 import React from 'react';
 
-import {Text, SafeAreaView, View} from 'react-native';
-import styles from './home.styles';
+import { SafeAreaView, View } from 'react-native';
 
-const Card = () => {
-  return <View style={styles.card} />;
-};
+import styles from './home.styles';
+import Logo from '../../components/Logo/logo.component';
+import PlayFieldComponent from '../../components/PlayField/playField.component';
 
 function Home(): React.JSX.Element {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Matching Cards</Text>
+    <SafeAreaView style={styles.main}>
+      <View style={styles.container}>
+        <Logo />
 
-      <View style={styles.list}>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((card: number) => (
-          <Card key={'Tarjeta ' + card} />
-        ))}
+        <PlayFieldComponent />
       </View>
     </SafeAreaView>
   );

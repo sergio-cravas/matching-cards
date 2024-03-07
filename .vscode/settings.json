@@ -1,13 +1,13 @@
 {
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
-    },
-    "material-icon-theme.folders.associations": {
-        "_components": "components",
-        "redux": "Redux-store",
-        "actions": "Redux-actions",
-        "reducers": "Redux-reducer",
-        "selectors": "Redux-selector",
-        "sagas": "Redux-reducer"
-    }
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "material-icon-theme.folders.associations": {
+    "_components": "components",
+    "redux": "Redux-store",
+    "actions": "Redux-actions",
+    "reducers": "Redux-reducer",
+    "selectors": "Redux-selector",
+    "sagas": "Redux-reducer"
+  }
 }
