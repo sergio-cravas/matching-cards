@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
@@ -13,7 +13,10 @@ const styles = StyleSheet.create({
 
     justifyContent: 'space-between'
   },
-  
+  playContainer: {
+    display: 'flex',
+    gap: 16
+  },
 });
 
 export default styles;
