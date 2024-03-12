@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { SafeAreaView, View } from 'react-native';
 
@@ -7,29 +7,37 @@ import PlayField from '../../components/PlayField/playField.component';
 
 import styles from './home.styles';
 import Timer from '../../components/Timer/timer.component';
+import Background from '../../components/Background/background.component';
 
 function Home(): React.JSX.Element {
-  const [stopTimer, setStopTimer] = useState(true);
+  const [record, setRecord] = useState<number>(0);
+  const [stopTimer, setStopTimer] = useState<boolean>(true);
 
-  const onFinish = () => {
+  const onFinish = useCallback(() => {
     setStopTimer(true);
-  };
+  }, []);
 
-  const onStart = () => {
+  const onStart = useCallback(() => {
     setStopTimer(false);
-  };
+  }, []);
 
   return (
-    <SafeAreaView style={styles.main}>
-      <View style={styles.container}>
-        <Logo />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#606080' }}>
+      <Background>
+        <View style={styles.container}>
+          <Logo />
 
-        <View style={styles.playContainer}>
-          <Timer stopTimer={stopTimer} record={0} />
+          <View style={styles.playContainer}>
+            <Timer
+              stopTimer={stopTimer}
+              record={record}
+              setRecord={setRecord}
+            />
 
-          <PlayField onStart={onStart} onFinish={onFinish} />
+            <PlayField onStart={onStart} onFinish={onFinish} />
+          </View>
         </View>
-      </View>
+      </Background>
     </SafeAreaView>
   );
 }

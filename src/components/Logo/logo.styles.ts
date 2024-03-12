@@ -6,19 +6,18 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   'first-title': {
-    color: colors.black,
+    color: colors.white,
     fontSize: 25,
     fontWeight: '300',
-    fontFamily: 'Montserrat-Light'
+    fontFamily: 'Montserrat-Light',
   },
   'second-title': {
-    color: colors.black,
+    color: colors.white,
     fontSize: 25,
     letterSpacing: 9.5,
     fontWeight: '500',
-    fontFamily: 'Montserrat-Medium'
-  }
+    fontFamily: 'Montserrat-Medium',
+  },
 });
 
 export default styles;
-

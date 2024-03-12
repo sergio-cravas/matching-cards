@@ -3,19 +3,19 @@ import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: colors.background
+    backgroundColor: colors.background,
   },
   container: {
-    height: '100%',
     width: '100%',
+    height: '100%',
     paddingVertical: 45,
     paddingHorizontal: 30,
 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   playContainer: {
     display: 'flex',
-    gap: 16
+    gap: 16,
   },
 });
 
