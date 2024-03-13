@@ -14,15 +14,23 @@ type Props = {
   hasPlayButton?: boolean;
   onPlay?: () => void;
   onPress: () => void;
-}
-
-const GameCard = ({ flipColor, isFlipped, isDisabled, hasPlayButton, onPlay, onPress }: Props) => {
-  return (
-    <Pressable onPress={onPress} disabled={isDisabled} style={[styles({}).card, isFlipped && styles({ flipColor })['card--flipped']]}>
-      {hasPlayButton && onPlay && <Pressable onPress={onPlay}><FontAwesomeIcon icon={faPlay} size={32} color='white' /></Pressable>}
-    </Pressable>
-  );
 };
 
+function GameCard({
+  cardID, flipColor, isFlipped, isDisabled, hasPlayButton, onPlay, onPress,
+}: Props) {
+  return (
+    <Pressable key={cardID} onPress={onPress} disabled={isDisabled} style={[styles({}).card, isFlipped && styles({ flipColor })['card--flipped']]}>
+      {hasPlayButton && onPlay && <Pressable onPress={onPlay}><FontAwesomeIcon icon={faPlay} size={32} color="white" /></Pressable>}
+    </Pressable>
+  );
+}
+
 export default React.memo(GameCard);
-export { Props as CardProps }
+export { Props as CardProps };
+
+GameCard.defaultProps = {
+  isDisabled: false,
+  hasPlayButton: false,
+  onPlay: undefined,
+};

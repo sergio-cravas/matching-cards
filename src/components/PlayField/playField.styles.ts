@@ -50,8 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     textAlign: 'center',
     color: colors.background,
-  }
+  },
 });
 
 export default styles;
-

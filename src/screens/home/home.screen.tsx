@@ -11,14 +11,22 @@ import Background from '../../components/Background/background.component';
 
 function Home(): React.JSX.Element {
   const [record, setRecord] = useState<number>(0);
-  const [stopTimer, setStopTimer] = useState<boolean>(true);
+  const [seconds, setSeconds] = useState<number>(0);
+
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isFinished, setIsFinished] = useState<boolean>(false);
 
   const onFinish = useCallback(() => {
-    setStopTimer(true);
-  }, []);
+    setIsFinished(true);
+    setIsPlaying(false);
+
+    if (!record || seconds < record) setRecord(seconds);
+    setSeconds(0);
+  }, [record, seconds]);
 
   const onStart = useCallback(() => {
-    setStopTimer(false);
+    setIsFinished(false);
+    setIsPlaying(true);
   }, []);
 
   return (
@@ -28,13 +36,20 @@ function Home(): React.JSX.Element {
           <Logo />
 
           <View style={styles.playContainer}>
-            <Timer
-              stopTimer={stopTimer}
-              record={record}
-              setRecord={setRecord}
-            />
+            {isPlaying && (
+              <Timer
+                record={record}
+                onUpdate={setSeconds}
+                stopTimer={isFinished}
+              />
+            )}
 
-            <PlayField onStart={onStart} onFinish={onFinish} />
+            <PlayField
+              isPlaying={isPlaying}
+              isFinished={isFinished}
+              onStart={onStart}
+              onFinish={onFinish}
+            />
           </View>
         </View>
       </Background>

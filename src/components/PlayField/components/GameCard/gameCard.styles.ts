@@ -18,13 +18,13 @@ const styles = ({ flipColor } : { flipColor?: string }) => StyleSheet.create({
 
     elevation: 4,
     shadowColor: 'rgba(0, 0, 0, 0.25)',
-    shadowOffset: {width: 4, height: 4},
+    shadowOffset: { width: 4, height: 4 },
     shadowOpacity: 1,
     shadowRadius: 4,
   },
-  "card--flipped": {
-    backgroundColor: flipColor
-  }
+  'card--flipped': {
+    backgroundColor: flipColor,
+  },
 });
 
 export default styles;

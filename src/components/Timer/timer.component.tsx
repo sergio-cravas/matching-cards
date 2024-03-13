@@ -7,50 +7,40 @@ import styles from './timer.styles';
 type Props = {
   record: number;
   stopTimer: boolean;
-  setRecord: (value: number) => void;
+  onUpdate: (value: number) => void;
 };
 
-const Timer = ({ record, stopTimer, setRecord }: Props) => {
+function Timer({ record, stopTimer, onUpdate }: Props) {
   const [seconds, setSeconds] = useState<number>(0);
-  const [blinkRecord, setBlinkRecord] = useState<boolean>(false);
 
   const transformSecondsIntoString = (secs: number): string => {
     const hours = Math.floor(secs / 3600);
     const minutes = Math.floor((secs % 3600) / 60);
-    const seconds = secs % 60;
+    const _seconds = secs % 60;
 
     const formattedHours = hours.toString().padStart(2, '0');
     const formattedMinutes = minutes.toString().padStart(2, '0');
-    const formattedSeconds = seconds.toString().padStart(2, '0');
+    const formattedSeconds = _seconds.toString().padStart(2, '0');
 
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
   };
 
   useEffect(() => {
-    let interval: NodeJS.Timeout = setInterval(
-      () => setSeconds(prevSeconds => prevSeconds + 1),
+    const interval: NodeJS.Timeout = setInterval(
+      () => setSeconds((prev: number) => prev + 1),
       1000,
     );
 
-    if (stopTimer) {
-      clearInterval(interval);
-      if (!record || seconds < record) handleOnUpdateRecord(seconds);
-      setSeconds(0);
-    }
+    if (stopTimer) clearInterval(interval);
 
     return () => clearInterval(interval);
   }, [stopTimer]);
 
-  const handleOnUpdateRecord = (newRecord: number) => {
-    setRecord(newRecord);
-    setBlinkRecord(true);
-
-    setTimeout(() => setBlinkRecord(false), 2500);
-  };
+  useEffect(() => onUpdate(seconds), [seconds, onUpdate]);
 
   return (
     <View style={styles.container}>
-      <Text style={[styles['record-time']]}>
+      <Text style={styles['record-time']}>
         {transformSecondsIntoString(record)}
       </Text>
 
@@ -59,6 +49,6 @@ const Timer = ({ record, stopTimer, setRecord }: Props) => {
       </Text>
     </View>
   );
-};
+}
 
 export default React.memo(Timer);
