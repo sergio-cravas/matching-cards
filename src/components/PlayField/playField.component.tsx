@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View } from 'react-native';
 
 import colors from '../../styles/colors';
 import { shuffleArray } from '../../utils/functions';
@@ -38,17 +38,15 @@ function PlayField({ isPlaying, isFinished, onStart, onFinish }: Props) {
 
     shuffledColors = shuffleArray(shuffledColors);
 
-    const result = shuffledColors.map(
-      (item: { id: string; color: string }) => {
-        return {
-          cardID: item.id,
-          isDisabled: !isPlaying,
-          flipColor: item.color,
-          isFlipped: false,
-          onPress: () => {},
-        };
-      },
-    );
+    const result = shuffledColors.map((item: { id: string; color: string }) => {
+      return {
+        cardID: item.id,
+        isDisabled: !isPlaying,
+        flipColor: item.color,
+        isFlipped: false,
+        onPress: () => {},
+      };
+    });
 
     return result;
   }, [isPlaying]);
@@ -82,12 +80,12 @@ function PlayField({ isPlaying, isFinished, onStart, onFinish }: Props) {
     [touchCard, flippedCards],
   );
 
-  const handleOnReset = useCallback(() => {
-    setTouchCard('');
-    setFlippedCards([]);
-
-    onStart();
-  }, [onStart]);
+  useEffect(() => {
+    if (isFinished) {
+      setTouchCard('');
+      setFlippedCards([]);
+    }
+  }, [isFinished]);
 
   useEffect(() => {
     if (flippedCards.length === cards.length) onFinish();
@@ -106,16 +104,6 @@ function PlayField({ isPlaying, isFinished, onStart, onFinish }: Props) {
             : {})}
         />
       ))}
-
-      {isFinished && (
-        <View style={styles.finishContainer}>
-          <Text style={styles.finishTitle}>Wonderful!</Text>
-
-          <Pressable onPress={handleOnReset}>
-            <Text style={styles.resetButton}>NEW GAME</Text>
-          </Pressable>
-        </View>
-      )}
     </View>
   );
 }

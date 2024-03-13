@@ -1,30 +1,40 @@
 import React, { useCallback, useState } from 'react';
-
 import { SafeAreaView, View } from 'react-native';
 
 import Logo from '../../components/Logo/logo.component';
+import Timer from '../../components/Timer/timer.component';
 import PlayField from '../../components/PlayField/playField.component';
+import Background from '../../components/Background/background.component';
+import FinishMessage from '../../components/FinishMessage/finishMessage.component';
 
 import styles from './home.styles';
-import Timer from '../../components/Timer/timer.component';
-import Background from '../../components/Background/background.component';
 
 function Home(): React.JSX.Element {
   const [record, setRecord] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
+  const [isNewRecord, setIsNewRecord] = useState<boolean>(false);
 
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isFinished, setIsFinished] = useState<boolean>(false);
+  const [isFirstPlay, setIsFirstPlay] = useState<boolean>(false);
 
   const onFinish = useCallback(() => {
     setIsFinished(true);
     setIsPlaying(false);
 
-    if (!record || seconds < record) setRecord(seconds);
+    if (seconds && (!record || seconds < record)) {
+      setIsNewRecord(true);
+      setRecord(seconds);
+    } else {
+      setIsNewRecord(false);
+    }
+
     setSeconds(0);
   }, [record, seconds]);
 
   const onStart = useCallback(() => {
+    setIsFirstPlay(true);
+
     setIsFinished(false);
     setIsPlaying(true);
   }, []);
@@ -36,11 +46,12 @@ function Home(): React.JSX.Element {
           <Logo />
 
           <View style={styles.playContainer}>
-            {isPlaying && (
+            {isFirstPlay && (
               <Timer
                 record={record}
+                seconds={seconds}
+                stopTimer={!isPlaying}
                 onUpdate={setSeconds}
-                stopTimer={isFinished}
               />
             )}
 
@@ -50,6 +61,10 @@ function Home(): React.JSX.Element {
               onStart={onStart}
               onFinish={onFinish}
             />
+
+            {isFinished && (
+              <FinishMessage isNewRecord={isNewRecord} onReset={onStart} />
+            )}
           </View>
         </View>
       </Background>

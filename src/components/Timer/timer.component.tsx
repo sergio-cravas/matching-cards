@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { View, Text } from 'react-native';
 
@@ -6,13 +6,12 @@ import styles from './timer.styles';
 
 type Props = {
   record: number;
+  seconds: number;
   stopTimer: boolean;
-  onUpdate: (value: number) => void;
+  onUpdate: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function Timer({ record, stopTimer, onUpdate }: Props) {
-  const [seconds, setSeconds] = useState<number>(0);
-
+function Timer({ record, seconds, stopTimer, onUpdate }: Props) {
   const transformSecondsIntoString = (secs: number): string => {
     const hours = Math.floor(secs / 3600);
     const minutes = Math.floor((secs % 3600) / 60);
@@ -27,16 +26,14 @@ function Timer({ record, stopTimer, onUpdate }: Props) {
 
   useEffect(() => {
     const interval: NodeJS.Timeout = setInterval(
-      () => setSeconds((prev: number) => prev + 1),
+      () => onUpdate((prev: number) => prev + 1),
       1000,
     );
 
     if (stopTimer) clearInterval(interval);
 
     return () => clearInterval(interval);
-  }, [stopTimer]);
-
-  useEffect(() => onUpdate(seconds), [seconds, onUpdate]);
+  }, [stopTimer, onUpdate]);
 
   return (
     <View style={styles.container}>
