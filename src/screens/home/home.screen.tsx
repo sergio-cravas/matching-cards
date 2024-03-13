@@ -12,7 +12,7 @@ import styles from './home.styles';
 function Home(): React.JSX.Element {
   const [record, setRecord] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
-  const [isNewRecord, setIsNewRecord] = useState<boolean>(false);
+  const [isNewRecord, setIsNewRecord] = useState<boolean>(true);
 
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isFinished, setIsFinished] = useState<boolean>(false);
@@ -25,7 +25,7 @@ function Home(): React.JSX.Element {
     if (seconds && (!record || seconds < record)) {
       setIsNewRecord(true);
       setRecord(seconds);
-    } else {
+    } else if (seconds) {
       setIsNewRecord(false);
     }
 
@@ -55,16 +55,18 @@ function Home(): React.JSX.Element {
               />
             )}
 
-            <PlayField
-              isPlaying={isPlaying}
-              isFinished={isFinished}
-              onStart={onStart}
-              onFinish={onFinish}
-            />
+            <View style={{ position: 'relative' }}>
+              <PlayField
+                isPlaying={isPlaying}
+                isFinished={isFinished}
+                onStart={onStart}
+                onFinish={onFinish}
+              />
 
-            {isFinished && (
-              <FinishMessage isNewRecord={isNewRecord} onReset={onStart} />
-            )}
+              {isFinished && (
+                <FinishMessage isNewRecord={isNewRecord} onReset={onStart} />
+              )}
+            </View>
           </View>
         </View>
       </Background>
