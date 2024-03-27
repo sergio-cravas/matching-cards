@@ -1,11 +1,9 @@
 import React from 'react';
 
-import Home from './src/screens/home/home.screen';
+import Play from './src/screens/play/play.screen';
 
 function App(): React.JSX.Element {
-  return (
-    <Home />
-  );
+  return <Play />;
 }
 
 export default App;

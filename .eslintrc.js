@@ -34,6 +34,8 @@ module.exports = {
     'operator-linebreak': 'off',
     'implicit-arrow-linebreak': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'import/prefer-default-export': 'off',
+    'react/jsx-closing-bracket-location': 'off',
   },
   globals: {
     fetch: false,

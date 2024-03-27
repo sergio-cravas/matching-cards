@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Svg, {
-  Defs, Rect, LinearGradient, Stop,
-} from 'react-native-svg';
+import Svg, { Defs, Rect, LinearGradient, Stop } from 'react-native-svg';
 
 function Background({ children }) {
   return (
@@ -10,9 +8,8 @@ function Background({ children }) {
       <Svg height="100%" width="100%" style={StyleSheet.absoluteFillObject}>
         <Defs>
           <LinearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <Stop offset="0" stopColor="#000000" />
-            <Stop offset="0.75" stopColor="#4D4855" />
-            <Stop offset="1" stopColor="#000000" />
+            <Stop offset="0" stopColor="#94FFD2" />
+            <Stop offset="1" stopColor="#BCFBFF" />
           </LinearGradient>
         </Defs>
 

@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { SafeAreaView, View } from 'react-native';
 
-import Logo from '../../components/Logo/logo.component';
-import Timer from '../../components/Timer/timer.component';
-import PlayField from '../../components/PlayField/playField.component';
-import Background from '../../components/Background/background.component';
-import FinishMessage from '../../components/FinishMessage/finishMessage.component';
+import Logo from '../../ui/Logo/logo.component';
+import Timer from '../../ui/Timer/timer.component';
+import PlayField from '../../ui/PlayField/playField.component';
+import Background from '../../ui/Background/background.component';
+import FinishMessage from '../../ui/FinishMessage/finishMessage.component';
 
 import styles from './home.styles';
 
